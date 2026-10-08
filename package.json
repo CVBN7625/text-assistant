@@ -33,5 +33,6 @@
     "typescript": "^5.0.0",
     "vue-eslint-parser": "^9.4.3",
     "vue-tsc": "^2.2.12"
-  }
+  },
+  "license": "MIT"
 }

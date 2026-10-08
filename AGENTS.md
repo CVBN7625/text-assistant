@@ -7,5 +7,5 @@
 - Use the locked pnpm version; do not upgrade frameworks for release cleanup.
 - Commands: `corepack pnpm verify`, `corepack pnpm package:extension:check`, `corepack pnpm font:check`.
 - Never embed production secrets in source or VITE_* variables.
-- Retain third-party font and code notices; project license is not yet selected.
+- Retain third-party font and code notices; project code is MIT; third-party notices retain their own terms.
 - Do not treat mock API tests as live integration verification.
