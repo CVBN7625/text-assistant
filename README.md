@@ -12,15 +12,15 @@
 ![Manifest V3](https://img.shields.io/badge/Chrome-Manifest_V3-927044?style=flat-square)
 [![CI](https://github.com/CVBN7625/text-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/CVBN7625/text-assistant/actions/workflows/ci.yml)
 
-[功能概览](#功能概览) · [技术设计](#技术设计) · [快速开始](#快速开始) · [验证与边界](#验证与边界) · [参考与许可](#参考与许可)
+[功能概览](#功能概览) · [技术设计](#技术设计) · [快速开始](#快速开始) · [开发与测试](#开发与测试) · [参考与许可](#参考与许可)
 
 </div>
 
 ![文本处理界面](docs/screenshots/text-processing.png)
 
-<p align="center"><sub>本地运行的真实 Web 界面。输入取自项目说明，未配置或调用外部 API。</sub></p>
+<p align="center"><sub>文本处理界面：在同一页面查看输入、处理结果和处理器配置。</sub></p>
 
-## 为什么做这个项目
+## 项目简介
 
 用于整理从网页、PDF 或文献中复制的文本，把换行、空格、字符和引用格式处理组织为可组合的操作。重复步骤可以保存为规则，AI、翻译和 OCR 则作为按需配置的辅助能力。
 
@@ -42,7 +42,7 @@
 
 ![自定义规则界面](docs/screenshots/custom-rules.png)
 
-规则按“处理前 → 内置处理器 → 处理后”组织，便于明确操作顺序。截图为本地实际页面。
+规则按“处理前 → 内置处理器 → 处理后”执行，支持模板导入、独立启停和即时预览。
 
 </details>
 
@@ -59,9 +59,9 @@ flowchart LR
     E -. 用户自行配置 .-> API
 ```
 
-- **复用处理能力，隔离客户端状态。** Web 与插件依赖同一个 Core，各自管理配置和运行时存储。
-- **用阶段和优先级表达处理顺序。** 自定义规则可在内置处理器之前或之后执行，避免靠点击顺序隐式组织流程。
-- **把外部服务当作可失败的依赖。** AI 适配包含超时、重试和结果校验；模拟测试与真实集成分开说明。
+- **共享处理核心。** Web 与插件依赖同一个 Core，各自管理配置和运行时存储。
+- **规则执行顺序。** 自定义规则可在内置处理器之前或之后执行，避免靠点击顺序隐式组织流程。
+- **外部服务适配。** AI 请求包含超时、重试和结果校验；服务配置分别保存在各客户端。
 
 | 层次 | 技术 |
 | --- | --- |
@@ -76,7 +76,7 @@ packages/core/       共享处理器、规则、配置与测试
 packages/web/        Vue 页面和服务适配
 packages/extension/  扩展页面、后台服务与 Manifest
 scripts/             字体和插件打包工具
-docs/                OCR 说明与真实截图
+docs/                OCR 说明与界面示例
 THIRD_PARTY_LICENSES/ 参考许可原文
 ```
 
@@ -91,7 +91,7 @@ corepack pnpm install --frozen-lockfile
 corepack pnpm dev --host 127.0.0.1
 ```
 
-打开 <http://127.0.0.1:3001>。开发脚本会先构建 Core，干净克隆无需手动调整包顺序。基础文本功能不需要 `.env`。
+打开 <http://127.0.0.1:3001>。开发脚本自动构建共享 Core；基础文本功能不需要 `.env`。
 
 1. 在“文本处理器”勾选需要的处理器，例如“全角转半角”。
 2. 输入 `ＡＢＣ１２３` 并点击“处理文本”，结果为 `ABC123`。
@@ -107,11 +107,11 @@ corepack pnpm --filter web preview --host 127.0.0.1
 corepack pnpm package:extension:check
 ```
 
-在 Chromium 扩展管理页开启开发者模式，选择“加载已解压的扩展程序”，指定 `packages/extension/dist`。插件构建和打包已验证，安装后的权限及完整运行流程尚未验收；项目未发布到扩展商店。
+在 Chromium 扩展管理页开启开发者模式，选择“加载已解压的扩展程序”，指定 `packages/extension/dist`。插件通过本地开发者模式加载，暂未提供扩展商店安装入口。
 
 </details>
 
-## 验证与边界
+## 开发与测试
 
 ```bash
 corepack pnpm verify
@@ -119,18 +119,20 @@ corepack pnpm package:extension:check
 corepack pnpm font:check
 ```
 
-2026-10-08 本地验证：三包类型检查、Lint、生产构建及 **178 项测试**通过（Core 121 / Web 16 / Extension 41）；文本转换、历史和主页面导航冒烟通过；插件打包与 26 个字体子集检查通过。Lint 保留 80 条既有警告，构建仍有 Vite CJS 弃用与大 chunk 提示。
+`verify` 执行三包类型检查、Lint、单元测试及生产构建。测试覆盖文本处理器、规则服务、配置管理与外部服务适配；插件打包和字体资源由独立脚本检查。测试范围与兼容性记录见 [测试说明](docs/TESTING.md)。
 
-真实 AI / 翻译 / OCR 调用依赖使用者配置、额度、网络和服务权限，尚未验证；Web 开发代理不包含在静态预览中，可能遇到 CORS 限制。完整规则编辑 UI 和插件安装后流程也未逐项验收。
+### 使用说明
 
-密钥仅由使用者在本地填写，仓库没有开发者测试凭据。浏览器 localStorage / 扩展存储不是加密保险库；不要把密钥写入 `VITE_*`，不要提交配置导出或含密钥的截图。更多说明见 [本地使用边界](RELEASE_STATUS.md)。项目未验证患者信息处理或医院部署场景。
+AI、翻译和 OCR 需要在本地设置中配置服务地址与凭据。网页使用 localStorage，插件使用扩展存储；密钥仅在调用对应上游时使用。配置导出默认排除凭据，敏感导出文件应单独保管。
+
+Web 开发服务器提供部分翻译代理，静态预览不包含该代理；OCR 和自定义 AI 服务的可用性取决于上游权限、额度及 CORS 设置。详细配置与存储说明见 [本地配置](RELEASE_STATUS.md)。
 
 ## 参考与许可
 
-本项目代码和文档采用 [MIT License](LICENSE)，版权署名使用 GitHub 账号 `CVBN7625`。第三方依赖、字体与参考许可仍按各自条款适用。
+代码和文档采用 [MIT License](LICENSE)。第三方依赖与字体遵循各自许可证。
 
-- [CopyPlusPlus](https://github.com/CopyPlusPlus/CopyPlusPlus)：参考文本操作思路；语言编码映射的原始来源注释及 MIT 声明保留。
-- [paper-assistant](https://github.com/laorange/paper-assistant)：参考论文文本处理思路。项目所有者确认没有复制或改编其代码；其 GPL-3.0 原文作为参考记录保留，不用于声明本项目整体许可。
-- [LXGW WenKai Screen](https://github.com/lxgw/LxgwWenKai-Screen)：字体采用 SIL OFL 1.1，Webfont 包的 MIT 声明及来源说明保留在字体目录。
+- [CopyPlusPlus](https://github.com/CopyPlusPlus/CopyPlusPlus)：文本操作思路与语言编码映射参考。
+- [paper-assistant](https://github.com/laorange/paper-assistant)：论文文本处理思路参考。
+- [LXGW WenKai Screen](https://github.com/lxgw/LxgwWenKai-Screen)：界面字体，采用 SIL OFL 1.1；Webfont 包采用 MIT。
 
-皮肤资源已由项目所有者确认是自制或 AI 生成且可公开使用。完整来源说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)；截图来源见 [截图记录](docs/SCREENSHOTS.md)。
+来源、许可文件及资源说明见 [第三方声明](THIRD_PARTY_NOTICES.md)。
