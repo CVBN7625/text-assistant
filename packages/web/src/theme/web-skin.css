@@ -1,0 +1,440 @@
+@import url("/fonts/lxgw-wenkai-screen/font.css");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ctp-text, #29251e);
+  background: var(--ctp-app-bg, #f7f6f2);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+.ctp-app {
+  --ctp-font-functional: Inter, system-ui, "Microsoft YaHei", sans-serif;
+  --ctp-font-handwriting: "LXGW WenKai Screen", "KaiTi", serif;
+  --ctp-font-mono: Consolas, "Courier New", monospace;
+  --ctp-app-bg: #f7f6f2;
+  --ctp-sidebar-bg: #f1eee6;
+  --ctp-surface: #fffdfa;
+  --ctp-surface-clean: #fffdfa;
+  --ctp-surface-soft: #f2eee5;
+  --ctp-surface-muted: #ebe5d9;
+  --ctp-border: #ddd5c6;
+  --ctp-border-strong: #cfc4b1;
+  --ctp-text: #25231f;
+  --ctp-text-soft: #514c44;
+  --ctp-text-muted: #706a5f;
+  --ctp-graphite: #8b8373;
+  --ctp-primary: #9a7447;
+  --ctp-primary-strong: #7f5c34;
+  --ctp-primary-soft: #eadfce;
+  --ctp-secondary: #66724a;
+  --ctp-secondary-strong: #4f5936;
+  --ctp-secondary-soft: #e5e8d5;
+  --ctp-success: #66724a;
+  --ctp-error: #b24b41;
+  --ctp-shadow: 0 1px 2px rgba(61, 50, 41, 0.08), 0 8px 22px rgba(61, 50, 41, 0.045);
+  min-height: 100vh;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] {
+  --ctp-app-bg: #f3efe4;
+  --ctp-sidebar-bg: #eae2cf;
+  --ctp-surface: rgba(251, 248, 240, 0.98);
+  --ctp-surface-clean: #fffdf8;
+  --ctp-surface-soft: #f6edd4;
+  --ctp-surface-muted: #e9dab8;
+  --ctp-border: #d8d0c0;
+  --ctp-border-strong: #b9ad96;
+  --ctp-text: #29251e;
+  --ctp-text-soft: #554f43;
+  --ctp-text-muted: #777061;
+  --ctp-graphite: #8b8373;
+  --ctp-primary: #c99928;
+  --ctp-primary-strong: #956d16;
+  --ctp-primary-soft: #f1e3b1;
+  --ctp-secondary: #667047;
+  --ctp-secondary-strong: #4f5936;
+  --ctp-secondary-soft: #e5e8d5;
+  --ctp-success: #667047;
+  --ctp-error: #a65e4d;
+  --ctp-shadow: 0 1px 2px rgba(61, 52, 36, 0.07), 0 8px 20px rgba(61, 52, 36, 0.045);
+  font-family: var(--ctp-font-handwriting);
+}
+
+.ctp-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: min(100%, 1480px);
+  margin: 0 auto;
+}
+
+.ctp-page-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  min-height: 68px;
+  padding: 14px 20px 14px 22px;
+  overflow: hidden;
+  border: 1px solid var(--ctp-border);
+  border-left: 3px solid var(--ctp-secondary);
+  border-radius: 8px;
+  background: var(--ctp-surface);
+}
+
+.ctp-page-header__copy {
+  position: relative;
+  z-index: 1;
+}
+
+.ctp-page-header h1,
+.ctp-empty-state h2 {
+  margin: 0;
+  color: var(--ctp-text);
+}
+
+.ctp-page-header h1 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 650;
+}
+
+.ctp-empty-state p {
+  margin: 5px 0 0;
+  color: var(--ctp-text-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.ctp-page-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ctp-page-header__aside,
+.ctp-page-header__actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ctp-page-header {
+  background:
+    linear-gradient(rgba(251, 248, 240, 0.94), rgba(251, 248, 240, 0.94)),
+    url("/themes/sunflower/v2/paper-grain.webp") center / 520px;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ctp-page-header h1,
+.ctp-app[data-ctp-skin="sunflower"] .ctp-empty-state h2 {
+  font-family: var(--ctp-font-handwriting);
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .n-input,
+.ctp-app[data-ctp-skin="sunflower"] .n-input input,
+.ctp-app[data-ctp-skin="sunflower"] .n-input textarea,
+.ctp-app[data-ctp-skin="sunflower"] .n-input-number,
+.ctp-app[data-ctp-skin="sunflower"] .n-base-selection-label,
+.ctp-app[data-ctp-skin="sunflower"] .ctp-receipt,
+.ctp-app[data-ctp-skin="sunflower"] .ctp-functional-text,
+.ctp-app[data-ctp-skin="sunflower"] .ctp-user-content {
+  font-family: var(--ctp-font-functional) !important;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ctp-technical-text,
+.ctp-app[data-ctp-skin="sunflower"] code,
+.ctp-app[data-ctp-skin="sunflower"] pre,
+.ctp-app[data-ctp-skin="sunflower"] kbd {
+  font-family: var(--ctp-font-mono) !important;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ctp-page-header--paint::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  bottom: 3px;
+  width: 190px;
+  height: 30px;
+  pointer-events: none;
+  background: url("/themes/sunflower/v2/paint-stroke-short.webp") center / contain no-repeat;
+  opacity: 0.62;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ctp-page-header--settings::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  bottom: -22px;
+  width: 240px;
+  height: 90px;
+  pointer-events: none;
+  background: url("/themes/sunflower/v2/botanical-settings-header.webp") right bottom / contain no-repeat;
+  opacity: 0.54;
+}
+
+.ctp-workbench {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ctp-app .ctp-work-sheet,
+.ctp-app .ctp-field-note,
+.ctp-app .ctp-ledger,
+.ctp-app .ctp-specimen-panel {
+  border-color: var(--ctp-border) !important;
+  background: var(--ctp-surface-clean) !important;
+  box-shadow: var(--ctp-shadow) !important;
+}
+
+.ctp-app .ctp-work-sheet {
+  border-top: 2px solid var(--ctp-graphite) !important;
+}
+
+.ctp-app .ctp-work-sheet--result {
+  border-top-color: var(--ctp-secondary) !important;
+  background: color-mix(in srgb, var(--ctp-secondary-soft) 18%, var(--ctp-surface-clean)) !important;
+}
+
+.ctp-app .ctp-field-note {
+  border-top: 2px solid var(--ctp-graphite) !important;
+  background: var(--ctp-surface) !important;
+}
+
+.ctp-app .ctp-ledger {
+  box-shadow: none !important;
+}
+
+.ctp-app .ctp-ledger .n-list,
+.ctp-app .ctp-ledger .n-list-item {
+  border: 0 !important;
+}
+
+.ctp-app .ctp-ledger .n-list-item {
+  border-bottom: 1px solid var(--ctp-border) !important;
+}
+
+.ctp-app .ctp-specimen-panel {
+  border-style: dashed !important;
+  border-color: var(--ctp-border-strong) !important;
+}
+
+.ctp-margin-note {
+  border: 0 !important;
+  border-left: 3px solid var(--ctp-secondary) !important;
+  border-radius: 0 6px 6px 0 !important;
+  background: color-mix(in srgb, var(--ctp-secondary-soft) 38%, transparent) !important;
+}
+
+.ctp-receipt {
+  border: 0 !important;
+  border-top: 1px dashed var(--ctp-border-strong) !important;
+  border-bottom: 1px dashed var(--ctp-border-strong) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.ctp-empty-state {
+  display: block;
+  grid-template-columns: minmax(180px, 42%) minmax(220px, 1fr);
+  align-items: center;
+  min-height: 280px;
+  padding: 28px;
+  border: 1px dashed var(--ctp-border-strong);
+  border-radius: 8px;
+  background: var(--ctp-surface);
+}
+
+.ctp-empty-state__art {
+  display: none;
+  min-height: 220px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.ctp-empty-state h2 {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.ctp-empty-state__action {
+  margin-top: 16px;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ctp-empty-state__art {
+  display: block;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ctp-empty-state {
+  display: grid;
+}
+
+.ctp-app .ctp-workbench .ctp-empty-state {
+  display: block;
+  text-align: center;
+}
+
+.ctp-workbench .ctp-empty-state__art {
+  min-height: 160px;
+}
+
+.custom-rules .ctp-empty-state,
+.ai-page .ctp-empty-state {
+  display: block !important;
+  text-align: center;
+}
+
+.custom-rules .ctp-empty-state__art,
+.ai-page .ctp-empty-state__art {
+  min-height: 180px;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ctp-empty-state--history .ctp-empty-state__art {
+  background-image: url("/themes/sunflower/v2/botanical-history-empty.webp");
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ctp-empty-state--specimen .ctp-empty-state__art {
+  background-image: url("/themes/sunflower/v2/empty-specimen-mount.webp");
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ctp-empty-state--technical .ctp-empty-state__art {
+  background-image: url("/themes/sunflower/v2/empty-technical-tools.webp");
+}
+
+.ctp-app .n-card {
+  border-radius: 8px !important;
+}
+
+.ctp-app .n-card:not(.ctp-selectable-card):hover {
+  box-shadow: var(--ctp-shadow) !important;
+}
+
+.ctp-app .n-alert {
+  box-shadow: none !important;
+}
+
+.ctp-app .n-tabs-bar {
+  height: 3px !important;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .n-tabs-bar {
+  background: var(--ctp-secondary) !important;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .n-tabs-tab {
+  position: relative;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .n-tabs-tab--active::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  bottom: -4px;
+  left: 8px;
+  height: 12px;
+  pointer-events: none;
+  background: url("/themes/sunflower/v2/paint-stroke-tab.webp") center / 100% 100% no-repeat;
+  opacity: 0.36;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .n-card {
+  background:
+    linear-gradient(rgba(251, 248, 240, 0.965), rgba(251, 248, 240, 0.965)),
+    url("/themes/sunflower/v2/paper-grain.webp") center / 620px !important;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .image-translator-page .translation-record-empty {
+  background:
+    linear-gradient(rgba(255, 253, 248, 0.48), rgba(255, 253, 248, 0.48)),
+    url("/themes/sunflower/v2/empty-specimen-mount.webp") center / 100% 100% no-repeat;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .image-translator-page .translated-note {
+  background:
+    linear-gradient(rgba(255, 253, 248, 0.82), rgba(255, 253, 248, 0.82)),
+    url("/themes/sunflower/v2/empty-specimen-mount.webp") center / 100% 100% no-repeat;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ocr-page .ocr-result-empty {
+  background:
+    linear-gradient(rgba(255, 253, 248, 0.48), rgba(255, 253, 248, 0.48)),
+    url("/themes/sunflower/v2/empty-specimen-mount.webp") center / 100% 100% no-repeat;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ocr-page .ocr-result-input {
+  background:
+    linear-gradient(rgba(255, 253, 248, 0.82), rgba(255, 253, 248, 0.82)),
+    url("/themes/sunflower/v2/empty-specimen-mount.webp") center / 100% 100% no-repeat !important;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .ocr-page .ocr-result-input .n-input__textarea-el {
+  background: transparent;
+}
+
+.ctp-app[data-ctp-skin="sunflower"] .n-input,
+.ctp-app[data-ctp-skin="sunflower"] .n-base-selection {
+  background: var(--ctp-surface-clean) !important;
+}
+
+@media (max-width: 960px) {
+  .ctp-workbench {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .ctp-page-header__aside {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 1100px) {
+  .ctp-rules-workshop {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .ctp-rules-workshop > * {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .ctp-page-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px;
+  }
+
+  .ctp-page-header__aside {
+    justify-content: flex-start;
+  }
+
+  .ctp-page-header::after,
+  .ctp-empty-state__art {
+    display: none !important;
+  }
+
+  .ctp-empty-state {
+    display: block;
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

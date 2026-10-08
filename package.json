@@ -1,0 +1,37 @@
+{
+  "name": "clipboard-text-processor",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.5.2",
+  "description": "浏览器插件与网页版文本处理工具",
+  "scripts": {
+    "dev": "corepack pnpm build:core && pnpm --filter web dev",
+    "dev:extension": "corepack pnpm build:core && pnpm --filter extension dev",
+    "build": "corepack pnpm run build:core && corepack pnpm run build:web && corepack pnpm run build:extension",
+    "build:core": "corepack pnpm --filter core build",
+    "build:web": "corepack pnpm --filter web build",
+    "build:extension": "corepack pnpm --filter extension build",
+    "test": "corepack pnpm build:core && corepack pnpm --filter core test && corepack pnpm --filter web test && corepack pnpm --filter extension test",
+    "typecheck": "corepack pnpm build:core && corepack pnpm --filter core typecheck && corepack pnpm --filter web typecheck && corepack pnpm --filter extension typecheck",
+    "verify": "corepack pnpm typecheck && corepack pnpm lint && corepack pnpm test && corepack pnpm build",
+    "package:extension": "corepack pnpm build:core && corepack pnpm --filter extension test && corepack pnpm --filter extension build && node scripts/package-extension.mjs",
+    "package:extension:check": "node scripts/package-extension.mjs --check-only",
+    "font:generate": "node scripts/generate-web-font.mjs",
+    "font:check": "node scripts/generate-web-font.mjs --check",
+    "lint": "eslint packages scripts --ext .ts,.vue,.mjs",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "archiver": "^7.0.1",
+    "eslint": "^8.0.0",
+    "eslint-plugin-vue": "^9.33.0",
+    "lxgw-wenkai-screen-webfont": "1.7.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0",
+    "vue-eslint-parser": "^9.4.3",
+    "vue-tsc": "^2.2.12"
+  }
+}

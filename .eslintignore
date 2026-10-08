@@ -1,0 +1,7 @@
+**/dist/
+**/node_modules/
+releases/
+packages/extension/public/fonts/
+packages/extension/public/themes/
+packages/web/public/fonts/
+packages/web/public/themes/

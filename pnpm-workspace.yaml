@@ -1,0 +1,8 @@
+packages:
+  - 'packages/*'
+allowBuilds:
+  core-js: false
+  dtrace-provider: false
+  esbuild: true
+  spawn-sync: false
+  vue-demi: true

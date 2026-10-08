@@ -1,0 +1,26 @@
+html,
+body,
+body *:not(
+  input,
+  input *,
+  textarea,
+  textarea *,
+  select,
+  select *,
+  option,
+  button,
+  button *,
+  [contenteditable],
+  [contenteditable] *,
+  [draggable='true'],
+  [draggable='true'] *,
+  #ctp-selection-action-icon,
+  #ctp-selection-action-icon *,
+  #ctp-selection-action-panel,
+  #ctp-selection-action-panel *,
+  #ctp-screenshot-overlay,
+  #ctp-screenshot-overlay *
+) {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
